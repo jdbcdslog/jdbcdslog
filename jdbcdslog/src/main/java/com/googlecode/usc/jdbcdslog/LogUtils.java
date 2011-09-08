@@ -49,7 +49,7 @@ public class LogUtils {
     }
 
     public static StringBuffer createLogEntry(String sql, TreeMap parameters) {
-        StringBuffer s = new StringBuffer(" ");
+        StringBuffer s = new StringBuffer();
 
         if (sql != null) {
             int questionMarkCount = 1;
@@ -76,7 +76,13 @@ public class LogUtils {
         if (object == null) {
             return "null";
         } else if (object instanceof String) {
-            return "'" + ((String) object).replaceAll("'", "''").replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\\\$") + "'"; // Oracle sql ' is special characters
+            //handle replaceAll's special characters: \ \$
+            String value = ((String) object).replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\\\$");
+            // handle Oracle sql's special characters,like ' &
+            value = value.replaceAll("'", "''")
+                         .replaceAll("&","'||chr(38)||'");
+
+            return "'" + value + "'";
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
         } else if (object instanceof Date) {
