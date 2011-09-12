@@ -40,15 +40,16 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
             r = method.invoke(target, args);
             if (setMethods.contains(method.getName()) && args[0] instanceof Integer)
                 parameters.put(args[0], args[1]);
+
             if ("clearParameters".equals(method.getName()))
                 parameters = new TreeMap();
-            if (toLog) {
-                long t2 = System.currentTimeMillis();
-                long time = t2 - t1;
 
+            if (toLog) {
                 // StringBuffer sb = LogUtils.createLogEntry(method, sql, parametersToString(), null);
                 StringBuffer sb = LogUtils.createLogEntry(sql, parameters);
 
+                long t2 = System.currentTimeMillis();
+                long time = t2 - t1;
                 if (ConfigurationParameters.showTime) {
                     sb.append(" ").append(t2 - t1).append(" ms.");
                 }
@@ -62,13 +63,12 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
             if (r instanceof ResultSet)
                 r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet) r);
         } catch (Throwable t) {
-//            LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, sql, parametersToString(), null));
              LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(sql, parameters));
         }
         return r;
     }
 
-    String parametersToString() {
+    /*String parametersToString() {
         StringBuffer sb2 = new StringBuffer();
         sb2.setLength(0);
         sb2.append("{");
@@ -92,5 +92,5 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
         }
         sb2.append("}");
         return sb2.toString();
-    }
+    }*/
 }

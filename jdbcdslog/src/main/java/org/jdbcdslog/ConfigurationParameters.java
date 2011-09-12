@@ -16,8 +16,10 @@ public class ConfigurationParameters {
 
     static Boolean showTime = false;
     static boolean printStackTrace = false;
+    static RdbmsSpecifics rdbmsSpecifics;
 
     static {
+
         ClassLoader loader = ConfigurationParameters.class.getClassLoader();
         InputStream in = null;
         try {
@@ -45,6 +47,17 @@ public class ConfigurationParameters {
                 showTime = true;
             }
 
+            String driverName = props.getProperty("jdbcdslog.driverName");
+            if ("oracle".equalsIgnoreCase(driverName)) {
+                rdbmsSpecifics = new OracleRdbmsSpecifics();
+            } else if ("mysql".equalsIgnoreCase(driverName)) {
+                rdbmsSpecifics = new MySqlRdbmsSpecifics();
+            } else if ("sqlserver".equalsIgnoreCase(driverName)) {
+                rdbmsSpecifics = new SqlServerRdbmsSpecifics();
+            } else {
+                rdbmsSpecifics = new RdbmsSpecifics();
+            }
+
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         } finally {
@@ -69,4 +82,5 @@ public class ConfigurationParameters {
             return false;
         }
     }
+
 }

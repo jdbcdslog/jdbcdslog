@@ -1,10 +1,6 @@
 package org.jdbcdslog;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +25,7 @@ public class LogUtils {
         }
     }
 
-    public static StringBuffer createLogEntry(Method method, Object sql, String parameters, String namedParameters) {
+/*    public static StringBuffer createLogEntry(Method method, Object sql, String parameters, String namedParameters) {
         String methodName = "createLogEntry() ";
         if (logger.isDebugEnabled())
             logger.debug(methodName);
@@ -46,7 +42,7 @@ public class LogUtils {
             s.append(namedParameters);
         }
         return s;
-    }
+    }*/
 
     public static StringBuffer createLogEntry(String sql, TreeMap parameters) {
         StringBuffer s = new StringBuffer();
@@ -58,7 +54,7 @@ public class LogUtils {
             StringBuffer stringBuffer = new StringBuffer();
 
             while (m.find()) {
-                m.appendReplacement(stringBuffer, sqlValueToString(parameters.get(questionMarkCount)));
+                m.appendReplacement(stringBuffer, ConfigurationParameters.rdbmsSpecifics.formatParameterObject(parameters.get(questionMarkCount)));
                 questionMarkCount++;
             }
             sql = String.valueOf(m.appendTail(stringBuffer));
@@ -69,30 +65,6 @@ public class LogUtils {
         return s;
     }
 
-    public static String sqlValueToString(Object object) {
-        /*
-         * if (o == null) return "null"; if (o instanceof String) return "'" + o.toString() + "'"; else if (o instanceof Reader && ConfigurationParameters.logText) { return readFromReader((Reader) o); } else return o.toString();
-         */
-        if (object == null) {
-            return "null";
-        } else if (object instanceof String) {
-            //handle replaceAll's special characters: \ \$
-            String value = ((String) object).replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\\\$");
-            // handle Oracle sql's special characters,like ' &
-            value = value.replaceAll("'", "''")
-                         .replaceAll("&","'||chr(38)||'");
-
-            return "'" + value + "'";
-        } else if (object instanceof Timestamp) {
-            return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
-        } else if (object instanceof Date) {
-            return "to_date('" + new SimpleDateFormat("yyyy-MM-dd").format(object) + "', 'yyyy-MM-dd')";
-        } else if (object instanceof Boolean) {
-            return ((Boolean) object).booleanValue() ? "Y" : "N";
-        } else {
-            return object.toString();
-        }
-    }
 
     public static String getStackTrace() {
         if (!ConfigurationParameters.printStackTrace)
