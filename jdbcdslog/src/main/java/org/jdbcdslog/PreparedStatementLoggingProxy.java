@@ -68,7 +68,7 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
         return r;
     }
 
-    /*String parametersToString() {
+    String parametersToString() {
         StringBuffer sb2 = new StringBuffer();
         sb2.setLength(0);
         sb2.append("{");
@@ -78,7 +78,7 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
         if (maxParamNumber > 0) {
             Integer key = new Integer(1);
             if (parameters.containsKey(key))
-                sb2.append(LogUtils.sqlValueToString(parameters.get(key)));
+                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameterObject(parameters.get(key)));
             else
                 sb2.append("(null)");
         }
@@ -86,11 +86,11 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
             Integer key = new Integer(i);
             sb2.append(", ");
             if (parameters.containsKey(key))
-                sb2.append(LogUtils.sqlValueToString(parameters.get(key)));
+                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameterObject(parameters.get(key)));
             else
                 sb2.append("(null)");
         }
         sb2.append("}");
         return sb2.toString();
-    }*/
+    }
 }

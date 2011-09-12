@@ -1,12 +1,14 @@
 package org.jdbcdslog;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 @SuppressWarnings("rawtypes")
 public class LogUtils {
 
@@ -25,7 +27,7 @@ public class LogUtils {
         }
     }
 
-/*    public static StringBuffer createLogEntry(Method method, Object sql, String parameters, String namedParameters) {
+    public static StringBuffer createLogEntry(Method method, Object sql, String parameters, String namedParameters) {
         String methodName = "createLogEntry() ";
         if (logger.isDebugEnabled())
             logger.debug(methodName);
@@ -42,7 +44,7 @@ public class LogUtils {
             s.append(namedParameters);
         }
         return s;
-    }*/
+    }
 
     public static StringBuffer createLogEntry(String sql, TreeMap parameters) {
         StringBuffer s = new StringBuffer();
@@ -64,7 +66,6 @@ public class LogUtils {
 
         return s;
     }
-
 
     public static String getStackTrace() {
         if (!ConfigurationParameters.printStackTrace)

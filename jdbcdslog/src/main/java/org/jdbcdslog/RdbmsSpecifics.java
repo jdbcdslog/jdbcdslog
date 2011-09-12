@@ -11,7 +11,7 @@ import java.util.Date;
  * @author ShunLi
  */
 public class RdbmsSpecifics {
-    RdbmsSpecifics() {
+    public RdbmsSpecifics() {
     }
 
     public String formatParameterObject(Object object) {

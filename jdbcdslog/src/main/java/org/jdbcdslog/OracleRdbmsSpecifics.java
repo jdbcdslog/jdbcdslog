@@ -7,11 +7,11 @@ package org.jdbcdslog;
  * @author ShunLi
  */
 public class OracleRdbmsSpecifics extends RdbmsSpecifics {
-    OracleRdbmsSpecifics() {
+    public OracleRdbmsSpecifics() {
         super();
     }
 
     public String formatParameterObject(Object object) {
-        return null;
+        return super.formatParameterObject(object);
     }
 }

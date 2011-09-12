@@ -6,4 +6,11 @@ package org.jdbcdslog;
  * @author ShunLi
  */
 public class SqlServerRdbmsSpecifics extends RdbmsSpecifics {
+    public SqlServerRdbmsSpecifics() {
+        super();
+    }
+
+    public String formatParameterObject(Object object) {
+        return super.formatParameterObject(object);
+    }
 }
