@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;
 
-import org.jdbcdslog.LogUtils;
 import org.junit.Test;
 
 public class LogUtilsTest {
@@ -30,4 +29,8 @@ public class LogUtilsTest {
 
     }
 
+    @Test
+    public void testReplaceEach() {
+        assertEquals("dcabe", LogUtils.replaceEach("abcde", new String[] { "ab", "d" }, new String[] { "d", "ab" }));
+    }
 }
