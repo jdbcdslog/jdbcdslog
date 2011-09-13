@@ -16,7 +16,7 @@ public class ConfigurationParameters {
 
     static Boolean showTime = false;
     static boolean printStackTrace = false;
-    static RdbmsSpecifics rdbmsSpecifics;
+    static RdbmsSpecifics rdbmsSpecifics = new OracleRdbmsSpecifics(); // oracle is default db.
 
     static {
 
@@ -49,13 +49,11 @@ public class ConfigurationParameters {
 
             String driverName = props.getProperty("jdbcdslog.driverName");
             if ("oracle".equalsIgnoreCase(driverName)) {
-                rdbmsSpecifics = new OracleRdbmsSpecifics();
+                // no op. since = default db. and skip next if statement,maybe better.
             } else if ("mysql".equalsIgnoreCase(driverName)) {
                 rdbmsSpecifics = new MySqlRdbmsSpecifics();
             } else if ("sqlserver".equalsIgnoreCase(driverName)) {
                 rdbmsSpecifics = new SqlServerRdbmsSpecifics();
-            } else {
-                rdbmsSpecifics = new RdbmsSpecifics();
             }
 
         } catch (Exception e) {

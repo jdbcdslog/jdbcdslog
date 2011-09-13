@@ -5,12 +5,12 @@ package org.jdbcdslog;
  *
  * @author ShunLi
  */
-public class MySqlRdbmsSpecifics extends RdbmsSpecifics {
+public class MySqlRdbmsSpecifics implements RdbmsSpecifics {
     public MySqlRdbmsSpecifics() {
         super();
     }
 
     public String formatParameterObject(Object object) {
-        return super.formatParameterObject(object);
+        return null;
     }
 }
