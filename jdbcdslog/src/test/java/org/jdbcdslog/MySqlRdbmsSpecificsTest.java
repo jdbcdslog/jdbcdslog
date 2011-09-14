@@ -27,7 +27,7 @@ public class MySqlRdbmsSpecificsTest {
     @Test
     public void testFormatStringParameter() {
         String string = "T'e\"st\r\n\tbl\\a%n_kAga\\in";
-        assertEquals("'T\\'e\\\"st\r\n\tbl\\\\\\a%n_kAga\\\\\\in'", mySqlRdbmsSpecifics.formatParameter(string));
+        assertEquals("'T\\\\'e\\\\\"st\\\\r\\\\n\\\\tbl\\\\\\\\\\a%n_kAga\\\\\\\\\\in'", mySqlRdbmsSpecifics.formatParameter(string));
     }
 
     @Test
