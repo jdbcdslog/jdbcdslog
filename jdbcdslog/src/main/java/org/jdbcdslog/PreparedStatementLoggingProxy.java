@@ -78,7 +78,7 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
         if (maxParamNumber > 0) {
             Integer key = new Integer(1);
             if (parameters.containsKey(key))
-                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameterObject(parameters.get(key)));
+                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameter(parameters.get(key)));
             else
                 sb2.append("(null)");
         }
@@ -86,7 +86,7 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
             Integer key = new Integer(i);
             sb2.append(", ");
             if (parameters.containsKey(key))
-                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameterObject(parameters.get(key)));
+                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameter(parameters.get(key)));
             else
                 sb2.append("(null)");
         }

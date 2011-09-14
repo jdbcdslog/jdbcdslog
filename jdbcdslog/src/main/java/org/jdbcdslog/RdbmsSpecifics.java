@@ -7,6 +7,6 @@ package org.jdbcdslog;
  */
 public interface RdbmsSpecifics {
 
-    String formatParameterObject(Object object);
+    String formatParameter(Object object);
 
 }

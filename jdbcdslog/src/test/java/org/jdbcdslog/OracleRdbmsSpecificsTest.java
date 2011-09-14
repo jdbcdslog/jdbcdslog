@@ -27,30 +27,30 @@ public class OracleRdbmsSpecificsTest {
     @Test
     public void testFormatStringParameter() {
         String string = "IN\\ST\\$S4R0'3&0'11";
-        assertEquals("'IN\\\\\\ST\\\\\\$S4R0''3'||chr(38)||'0''11'", oracleRdbmsSpecifics.formatParameterObject(string));
+        assertEquals("'IN\\\\\\ST\\\\\\$S4R0''3'||chr(38)||'0''11'", oracleRdbmsSpecifics.formatParameter(string));
     }
 
     @Test
     public void testFormatDateParameter() {
         Date date = cal.getTime();
-        assertEquals("to_date('2011-01-01', 'yyyy-MM-dd')", oracleRdbmsSpecifics.formatParameterObject(date));
+        assertEquals("to_date('2011-01-01', 'yyyy-MM-dd')", oracleRdbmsSpecifics.formatParameter(date));
     }
 
     @Test
     public void testFormatTimeStampParameter() {
         Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
-        assertEquals("to_timestamp('2011-01-01 23:59:59.000', 'yyyy-MM-dd hh24:mi:ss.ff3')", oracleRdbmsSpecifics.formatParameterObject(timestamp));
+        assertEquals("to_timestamp('2011-01-01 23:59:59.000', 'yyyy-MM-dd hh24:mi:ss.ff3')", oracleRdbmsSpecifics.formatParameter(timestamp));
     }
 
     @Test
     public void testFormatBooleanParameter() {
         Boolean bool = Boolean.TRUE;
-        assertEquals("Y", oracleRdbmsSpecifics.formatParameterObject(bool));
+        assertEquals("Y", oracleRdbmsSpecifics.formatParameter(bool));
     }
 
     @Test
     public void testFormatObjectParameter() {
         Long value = 80L;
-        assertEquals("80", oracleRdbmsSpecifics.formatParameterObject(value));
+        assertEquals("80", oracleRdbmsSpecifics.formatParameter(value));
     }
 }

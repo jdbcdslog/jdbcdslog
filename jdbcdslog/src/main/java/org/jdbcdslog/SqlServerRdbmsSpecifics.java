@@ -10,7 +10,7 @@ public class SqlServerRdbmsSpecifics implements RdbmsSpecifics {
         super();
     }
 
-    public String formatParameterObject(Object object) {
+    public String formatParameter(Object object) {
         return null;
     }
 }

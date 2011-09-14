@@ -14,30 +14,18 @@ public class OracleRdbmsSpecifics implements RdbmsSpecifics {
         super();
     }
 
-    public String formatParameterObject(Object object) {
+    public String formatParameter(Object object) {
         if (object == null) {
             return "null";
         } else if (object instanceof String) {
-
-            String text = ((String) object);
-
-            // String value = ((String) object).replaceAll("\\\\", ).replaceAll("\\$");
-            // value = value.replaceAll("'")
-            // .replaceAll("\"")
-            // TODO only handle % _ when use like statment. later processing. and must check Oracle,is same specifily.
-            // .replaceAll("%", "\\\\\\%")
-            // .replaceAll("_", "\\\\\\_")
-            ;
-
-            return "'" + LogUtils.replaceEach(text, new String[] { "\\", "\\$", "'", "&" }, new String[] {"\\\\\\", "\\\\\\$", "''", "'||chr(38)||'" }) + "'";
-
-            // //handle replaceAll's special characters: \ \$
-            // String value = ((String) object).replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\\\$");
-            // // handle Oracle sql's special characters,like ' &
-            // value = value.replaceAll("'", "''")
-            // .replaceAll("&","'||chr(38)||'");
-            //
-            // return "'" + value + "'";
+            String text = LogUtils.replaceEach(
+                    (String) object,
+                    new String[] { "\\", "\\$", "'", "&", "\r\n", "\t" },
+                    new String[] { "\\\\\\", "\\\\\\$", "''", "'||chr(38)||'" , "'||chr(10)||'", "'||chr(9)||'"});
+            // handle Matcher's appendReplacement method special characters: \ and \$ and \r,\n,\t
+            // handle Oracle sql statment's special characters,like ' and &
+            // TODO only handle % and _ when use like statment. later processing.
+            return "'" + text + "'";
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
         } else if (object instanceof Date) {

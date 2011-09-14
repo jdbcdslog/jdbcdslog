@@ -27,31 +27,31 @@ public class MySqlRdbmsSpecificsTest {
     @Test
     public void testFormatStringParameter() {
         String string = "T'e\"st\r\n\tbl\\a%n_kAga\\in";
-        assertEquals("'T\\'e\\\"st\r\n\tbl\\\\\\a%n_kAga\\\\\\in'", mySqlRdbmsSpecifics.formatParameterObject(string));
+        assertEquals("'T\\'e\\\"st\r\n\tbl\\\\\\a%n_kAga\\\\\\in'", mySqlRdbmsSpecifics.formatParameter(string));
     }
 
     @Test
     public void testFormatDateParameter() {
         Date date = cal.getTime();
-        assertEquals("'2011-01-01'", mySqlRdbmsSpecifics.formatParameterObject(date));
+        assertEquals("'2011-01-01'", mySqlRdbmsSpecifics.formatParameter(date));
     }
 
     @Test
     public void testFormatTimeStampParameter() {
         Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
-        assertEquals("'2011-01-01 23:59:59'", mySqlRdbmsSpecifics.formatParameterObject(timestamp));
+        assertEquals("'2011-01-01 23:59:59'", mySqlRdbmsSpecifics.formatParameter(timestamp));
     }
 
 
     @Test
     public void testFormatBooleanParameter() {
         Boolean bool = Boolean.TRUE;
-        assertEquals("'1'", mySqlRdbmsSpecifics.formatParameterObject(bool));
+        assertEquals("'1'", mySqlRdbmsSpecifics.formatParameter(bool));
     }
 
     @Test
     public void testFormatObjectParameter() {
         Long value = 80L;
-        assertEquals("80", mySqlRdbmsSpecifics.formatParameterObject(value));
+        assertEquals("80", mySqlRdbmsSpecifics.formatParameter(value));
     }
 }

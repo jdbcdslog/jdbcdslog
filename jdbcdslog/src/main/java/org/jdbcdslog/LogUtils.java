@@ -56,7 +56,7 @@ public class LogUtils {
             StringBuffer stringBuffer = new StringBuffer();
 
             while (m.find()) {
-                m.appendReplacement(stringBuffer, ConfigurationParameters.rdbmsSpecifics.formatParameterObject(parameters.get(questionMarkCount)));
+                m.appendReplacement(stringBuffer, ConfigurationParameters.rdbmsSpecifics.formatParameter(parameters.get(questionMarkCount)));
                 questionMarkCount++;
             }
             sql = String.valueOf(m.appendTail(stringBuffer));

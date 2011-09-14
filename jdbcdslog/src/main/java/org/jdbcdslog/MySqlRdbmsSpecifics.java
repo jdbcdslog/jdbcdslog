@@ -14,24 +14,21 @@ public class MySqlRdbmsSpecifics implements RdbmsSpecifics {
         super();
     }
 
-    public String formatParameterObject(Object object) {
+    public String formatParameter(Object object) {
         if (object == null) {
             return "null";
         } else if (object instanceof String) {
-            // handle replaceAll's special characters: \ \$
-            // TODO handle mysql sql's special characters,like...
-            // handle Oracle sql's special characters,like '
-            String text = ((String) object);
+            String text = LogUtils.replaceEach(
+                    (String) object,
+                    new String[] { "\\", "\\$", "'", "\"", "\r", "\n", "\t" },
+                    new String[] { "\\\\\\\\\\", "\\\\\\$", "\\\\'", "\\\\\"", "\\\\r", "\\\\n", "\\\\t" });
 
-            // String value = ((String) object).replaceAll("\\\\", ).replaceAll("\\$");
-            // value = value.replaceAll("'")
-            // .replaceAll("\"")
-            // TODO only handle % _ when use like statment. later processing. and must check Oracle,is same specifily.
-            // .replaceAll("%", "\\\\\\%")
-            // .replaceAll("_", "\\\\\\_")
-            ;
+            // handle Matcher's appendReplacement method special characters: \ and \$
+            // handle mysql sql statment's special characters,like ' and " and \ and \r,\n,\t
 
-            return "'" + LogUtils.replaceEach(text, new String[] { "\\", "\\$", "'", "\"", "\\" }, new String[] {"\\\\\\", "\\\\\\$", "\\'", "\\\"", "\\\\" }) + "'";
+            // TODO only handle % and _ when use like statment. later processing.
+            // TODO later handle \r \n \t and must check oracle,maybe have some issues.
+            return "'" + text + "'";
         } else if (object instanceof Timestamp) {
             return "'" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object) + "'";
         } else if (object instanceof Date) {
