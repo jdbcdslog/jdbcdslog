@@ -16,7 +16,7 @@ public class LogUtilsTest {
         String sql = "select * from mc_instr where instr_cde = ? and instcl_id = ? and expr_date = ? and last_upd_time = ?";
         TreeMap<Integer, Object> parameters = new TreeMap<Integer, Object>();
         // String string = "T'e\"st\r\n\tbl\\a%n_kA&ga\\in";
-        parameters.put(1, "IN\\ST\\$S4R0'3&0'11\r\n1\t2");
+        parameters.put(1, "IN\\ST\\$S4R0'3&0'11\n1\t2");
         parameters.put(2, 1);
 
         Calendar cal = new GregorianCalendar(2011, 0, 1, 23, 59, 59);

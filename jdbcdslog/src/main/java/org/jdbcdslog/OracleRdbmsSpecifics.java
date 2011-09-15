@@ -20,7 +20,7 @@ public class OracleRdbmsSpecifics implements RdbmsSpecifics {
         } else if (object instanceof String) {
             String text = LogUtils.replaceEach(
                     (String) object,
-                    new String[] { "\\", "\\$", "'", "&", "\r\n", "\t" },
+                    new String[] { "\\", "\\$", "'", "&", "\n", "\t" },
                     new String[] { "\\\\\\", "\\\\\\$", "''", "'||chr(38)||'" , "'||chr(10)||'", "'||chr(9)||'"});
             // handle Matcher's appendReplacement method special characters: \ and \$ and \r,\n,\t
             // handle Oracle sql statment's special characters,like ' and &
