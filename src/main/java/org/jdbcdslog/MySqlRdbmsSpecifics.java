@@ -27,7 +27,7 @@ public class MySqlRdbmsSpecifics implements RdbmsSpecifics {
             // handle mysql sql statment's special characters,like ' and " and \ and \r,\n,\t
 
             // TODO only handle % and _ when use like statment. later processing.
-            // TODO later handle \r \n \t and must check oracle,maybe have some issues.
+
             return "'" + text + "'";
         } else if (object instanceof Timestamp) {
             return "'" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object) + "'";

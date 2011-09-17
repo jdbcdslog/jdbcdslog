@@ -22,9 +22,12 @@ public class OracleRdbmsSpecifics implements RdbmsSpecifics {
                     (String) object,
                     new String[] { "\\", "\\$", "'", "&", "\n", "\t" },
                     new String[] { "\\\\\\", "\\\\\\$", "''", "'||chr(38)||'" , "'||chr(10)||'", "'||chr(9)||'"});
-            // handle Matcher's appendReplacement method special characters: \ and \$ and \r,\n,\t
-            // handle Oracle sql statment's special characters,like ' and &
+
+            // handle Matcher's appendReplacement method special characters: \ and \$
+            // handle Oracle sql statment's special characters,like ' and & and \n,\t
+
             // TODO only handle % and _ when use like statment. later processing.
+
             return "'" + text + "'";
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
