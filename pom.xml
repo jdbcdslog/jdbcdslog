@@ -10,7 +10,7 @@
     <version>1.0.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>jdbcdslog</name>
-    <url>http://code.google.com/p/jdbcdslog/</url>
+    <url>http://code.google.com/p/jdbcdslog-exp/</url>
 
     <licenses>
         <license>
@@ -20,9 +20,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://usc.googlecode.com/svn/trunk/jdbcdslog/</connection>
-        <developerConnection>scm:svn:https://usc.googlecode.com/svn/trunk/jdbcdslog/</developerConnection>
-        <url>http://usc.googlecode.com/svn/trunk/jdbcdslog/</url>
+        <connection>scm:svn:http://jdbcdslog-exp.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://jdbcdslog-exp.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://jdbcdslog-exp.googlecode.com/svn/trunk/</url>
     </scm>
 
     <developers>
@@ -129,8 +129,8 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.0-beta-8</version>
                 <configuration>
-                    <tagBase>https://usc.googlecode.com/svn/tags/</tagBase>
-                    <branchBase>https://usc.googlecode.com/svn/branches/</branchBase>
+                    <tagBase>https://jdbcdslog-exp.googlecode.com/svn/tags/</tagBase>
+                    <branchBase>https://jdbcdslog-exp.googlecode.com/svn/branches/</branchBase>
                     <goal>install</goal>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
