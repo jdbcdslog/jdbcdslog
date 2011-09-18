@@ -56,6 +56,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <JAVA_1_5_HOME>C:\Program Files\Java\jdk1.5.0_22</JAVA_1_5_HOME>
     </properties>
 
     <dependencies>
@@ -124,7 +125,7 @@
                     <target>1.5</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <fork>true</fork>
-                    <executable>javac</executable>
+                    <executable>${JAVA_1_5_HOME}/bin/javac</executable>
                     <compilerVersion>1.5</compilerVersion>
                 </configuration>
             </plugin>
