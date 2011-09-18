@@ -24,9 +24,8 @@ public class ConfigurationParameters {
         try {
             in = loader.getResourceAsStream("jdbcdslog.properties");
             props = new Properties(System.getProperties());
-            if (in != null){
+            if (in != null)
                 props.load(in);
-            }
 
             initSlowQueryThreshold();
             initLogText();

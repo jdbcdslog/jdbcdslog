@@ -25,6 +25,10 @@
         <url>http://jdbcdslog-exp.googlecode.com/svn/trunk/</url>
     </scm>
 
+    <issueManagement>
+        <url>http://code.google.com/p/jdbcdslog-exp/issues/list</url>
+    </issueManagement>
+
     <developers>
         <developer>
             <name>akolyadenko</name>

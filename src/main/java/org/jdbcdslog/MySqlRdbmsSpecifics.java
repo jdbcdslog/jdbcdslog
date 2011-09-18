@@ -1,5 +1,6 @@
 package org.jdbcdslog;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,8 @@ public class MySqlRdbmsSpecifics implements RdbmsSpecifics {
             return "'" + text + "'";
         } else if (object instanceof Timestamp) {
             return "'" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object) + "'";
+        } else if (object instanceof Time) {
+            return "'" + new SimpleDateFormat("HH:mm:ss").format(object) + "'";
         } else if (object instanceof Date) {
             return "'" + new SimpleDateFormat("yyyy-MM-dd").format(object) + "'";
         } else if (object instanceof Boolean) {

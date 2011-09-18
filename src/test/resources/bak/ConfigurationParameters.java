@@ -18,35 +18,6 @@ public class ConfigurationParameters {
     static boolean printStackTrace = false;
     static RdbmsSpecifics rdbmsSpecifics = new OracleRdbmsSpecifics(); // oracle is default db.
 
-    static {
-        ClassLoader loader = ConfigurationParameters.class.getClassLoader();
-        InputStream in = null;
-        try {
-            in = loader.getResourceAsStream("jdbcdslog.properties");
-            props = new Properties(System.getProperties());
-            if (in != null){
-                props.load(in);
-            }
-
-            initSlowQueryThreshold();
-            initLogText();
-            initPrintStackTrace();
-            initShowTime();
-            initRdbmsSpecifics();
-
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            if (in != null)
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-        }
-    }
-
-    /* init parameters start. */
     private static void initSlowQueryThreshold() {
         String sSlowQueryThreshold = props.getProperty("jdbcdslog.slowQueryThreshold");
         if (sSlowQueryThreshold != null && isLong(sSlowQueryThreshold)) {
@@ -78,7 +49,7 @@ public class ConfigurationParameters {
         }
     }
 
-    private static void initRdbmsSpecifics() {
+    private static RdbmsSpecifics initRdbmsSpecifics() {
         String driverName = props.getProperty("jdbcdslog.driverName");
         if ("oracle".equalsIgnoreCase(driverName)) {
             // no op. since = default db. and skip next if statement,maybe better.
@@ -87,8 +58,36 @@ public class ConfigurationParameters {
         } else if ("sqlserver".equalsIgnoreCase(driverName)) {
             rdbmsSpecifics = new SqlServerRdbmsSpecifics();
         }
+
+        return rdbmsSpecifics;
     }
-    /* init parameters end. */
+
+    static {
+        ClassLoader loader = ConfigurationParameters.class.getClassLoader();
+        InputStream in = null;
+        try {
+            in = loader.getResourceAsStream("jdbcdslog.properties");
+            props = new Properties(System.getProperties());
+            if (in != null)
+                props.load(in);
+
+            initSlowQueryThreshold();
+            initLogText();
+            initPrintStackTrace();
+            initShowTime();
+            initRdbmsSpecifics();
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        } finally {
+            if (in != null)
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+        }
+    }
 
     public static void setLogText(boolean alogText) {
         logText = alogText;
