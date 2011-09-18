@@ -7,7 +7,7 @@
     </parent>
     <groupId>com.googlecode.usc</groupId>
     <artifactId>jdbcdslog</artifactId>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.6</version>
     <packaging>jar</packaging>
     <name>jdbcdslog</name>
     <url>http://code.google.com/p/jdbcdslog-exp/</url>
@@ -20,9 +20,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://jdbcdslog-exp.googlecode.com/svn/trunk/</connection>
-        <developerConnection>scm:svn:https://jdbcdslog-exp.googlecode.com/svn/trunk/</developerConnection>
-        <url>http://jdbcdslog-exp.googlecode.com/svn/trunk/</url>
+        <connection>scm:svn:http://jdbcdslog-exp.googlecode.com/svn/tags/jdbcdslog-1.0.6</connection>
+        <developerConnection>scm:svn:https://jdbcdslog-exp.googlecode.com/svn/tags/jdbcdslog-1.0.6</developerConnection>
+        <url>http://jdbcdslog-exp.googlecode.com/svn/tags/jdbcdslog-1.0.6</url>
     </scm>
 
     <issueManagement>
@@ -56,6 +56,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <JAVA_1_5_HOME>C:\Program Files\Java\jdk1.5.0_22</JAVA_1_5_HOME>
     </properties>
 
     <dependencies>
@@ -124,7 +125,7 @@
                     <target>1.5</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <fork>true</fork>
-                    <executable>javac</executable>
+                    <executable>${JAVA_1_5_HOME}/bin/javac</executable>
                     <compilerVersion>1.5</compilerVersion>
                 </configuration>
             </plugin>
