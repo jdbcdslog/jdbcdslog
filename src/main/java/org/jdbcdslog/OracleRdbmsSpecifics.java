@@ -20,11 +20,11 @@ public class OracleRdbmsSpecifics implements RdbmsSpecifics {
         } else if (object instanceof String) {
             String text = LogUtils.replaceEach(
                     (String) object,
-                    new String[] { "\\", "$", "'", "&", "\n", "\t" },
-                    new String[] { "\\\\", "\\$", "''", "'||chr(38)||'", "'||chr(10)||'", "'||chr(9)||'" });
+                    new String[] { "\\", "$", "'", "&", "\r", "\n", "\t" },
+                    new String[] { "\\\\", "\\$", "''", "'||chr(38)||'", "", "'||chr(10)||'", "'||chr(9)||'" });
 
             // handle Matcher's appendReplacement method special characters: \ and $
-            // handle Oracle sql statment's special characters,like ' and & and \n,\t
+            // handle Oracle sql statment's special characters,like ' and & and \r, \n,\t
 
             // TODO only handle % and _ when use like statment. later processing.
 
