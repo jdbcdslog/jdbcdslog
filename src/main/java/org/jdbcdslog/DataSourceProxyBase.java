@@ -148,9 +148,9 @@ public class DataSourceProxyBase implements Serializable {
         }
         logger.debug(m + "(" + p.toString() + ")");
         try {
-            Method me = targetDS.getClass().getMethod(m, new Class[] { c });
+            Method me = targetDS.getClass().getMethod(m, c);
             if (me != null)
-                me.invoke(targetDS, new Object[] { p });
+                me.invoke(targetDS, p);
         } catch (Exception e) {
             ConnectionLogger.error(e.getMessage(), e);
         }
