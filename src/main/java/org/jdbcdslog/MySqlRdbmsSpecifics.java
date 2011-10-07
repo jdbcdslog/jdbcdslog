@@ -21,10 +21,10 @@ public class MySqlRdbmsSpecifics implements RdbmsSpecifics {
         } else if (object instanceof String) {
             String text = LogUtils.replaceEach(
                     (String) object,
-                    new String[] { "\\", "\\$", "'", "\"", "\r", "\n", "\t" },
-                    new String[] { "\\\\\\\\\\", "\\\\\\$", "\\\\'", "\\\\\"", "\\\\r", "\\\\n", "\\\\t" });
+                    new String[] { "\\", "$", "'", "\"", "\r", "\n", "\t" },
+                    new String[] { "\\\\\\\\", "\\$", "\\\\'", "\\\\\"", "\\\\r", "\\\\n", "\\\\t" });
 
-            // handle Matcher's appendReplacement method special characters: \ and \$
+            // handle Matcher's appendReplacement method special characters: \ and $
             // handle mysql sql statment's special characters,like ' and " and \ and \r,\n,\t
 
             // TODO only handle % and _ when use like statment. later processing.

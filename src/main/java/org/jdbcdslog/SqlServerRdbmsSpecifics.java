@@ -20,10 +20,10 @@ public class SqlServerRdbmsSpecifics implements RdbmsSpecifics {
         } else if (object instanceof String) {
             String text = LogUtils.replaceEach(
                     (String) object,
-                    new String[] { "\\", "\\$", "'" },
-                    new String[] { "\\\\\\", "\\\\\\$", "''" });
+                    new String[] { "\\", "$", "'" },
+                    new String[] { "\\\\", "\\$", "''" });
 
-            // handle Matcher's appendReplacement method special characters: \ and \$
+            // handle Matcher's appendReplacement method special characters: \ and $
             // handle sql server sql statment's special characters,like '
 
             // TODO handle other special characters which i don't know.

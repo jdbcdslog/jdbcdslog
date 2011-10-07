@@ -27,7 +27,7 @@ public class OracleRdbmsSpecificsTest {
     @Test
     public void testFormatStringParameter() {
         String string = "IN\\ST\\$S4R0'3&0'11";
-        assertEquals("'IN\\\\\\ST\\\\\\$S4R0''3'||chr(38)||'0''11'", oracleRdbmsSpecifics.formatParameter(string));
+        assertEquals("'IN\\\\ST\\\\\\$S4R0''3'||chr(38)||'0''11'", oracleRdbmsSpecifics.formatParameter(string));
     }
 
     @Test

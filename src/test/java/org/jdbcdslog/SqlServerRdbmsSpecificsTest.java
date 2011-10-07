@@ -27,7 +27,7 @@ public class SqlServerRdbmsSpecificsTest {
     @Test
     public void testFormatStringParameter() {
         String string = "T'e\"s\\t\\$todo";
-        assertEquals("'T''e\"s\\\\\\t\\\\\\$todo'", sqlServerRdbmsSpecifics.formatParameter(string));
+        assertEquals("'T''e\"s\\\\t\\\\\\$todo'", sqlServerRdbmsSpecifics.formatParameter(string));
     }
 
     @Test
