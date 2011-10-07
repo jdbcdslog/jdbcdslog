@@ -7,7 +7,7 @@
     </parent>
     <groupId>com.googlecode.usc</groupId>
     <artifactId>jdbcdslog</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>jdbcdslog</name>
     <url>http://code.google.com/p/jdbcdslog-exp/</url>
@@ -20,9 +20,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://jdbcdslog-exp.googlecode.com/svn/tags/jdbcdslog-1.0.6</connection>
-        <developerConnection>scm:svn:https://jdbcdslog-exp.googlecode.com/svn/tags/jdbcdslog-1.0.6</developerConnection>
-        <url>http://jdbcdslog-exp.googlecode.com/svn/tags/jdbcdslog-1.0.6</url>
+        <connection>scm:svn:http://jdbcdslog-exp.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://jdbcdslog-exp.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://jdbcdslog-exp.googlecode.com/svn/trunk/</url>
     </scm>
 
     <issueManagement>
