@@ -178,6 +178,9 @@
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
+                                <configuration>
+                                    <locale>en_US</locale>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
