@@ -6,19 +6,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-public class StatementLoggingProxy implements InvocationHandler {
-
-    static Logger logger = LoggerFactory.getLogger(StatementLoggingProxy.class);
-
+public class StatementLoggingHandler implements InvocationHandler {
     Object targetStatement = null;
 
     @SuppressWarnings("rawtypes")
     static List executeMethods = Arrays.asList(new String[] { "addBatch", "execute", "executeQuery", "executeUpdate" });
 
-    public StatementLoggingProxy(Statement statement) {
+    public StatementLoggingHandler(Statement statement) {
         targetStatement = statement;
     }
 
@@ -31,7 +25,7 @@ public class StatementLoggingProxy implements InvocationHandler {
                 t1 = System.currentTimeMillis();
             r = method.invoke(targetStatement, args);
             if (r instanceof ResultSet)
-                r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet) r);
+                r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
             if (toLog) {
                 long t2 = System.currentTimeMillis();
                 StringBuffer sb = LogUtils.createLogEntry(method, args == null ? null : args[0], null, null);

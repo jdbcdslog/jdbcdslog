@@ -7,14 +7,8 @@ import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 @SuppressWarnings({"unchecked","rawtypes"})
-public class PreparedStatementLoggingProxy implements InvocationHandler {
-
-    static Logger logger = LoggerFactory.getLogger(PreparedStatementLoggingProxy.class);
-
+public class PreparedStatementLoggingHandler implements InvocationHandler {
     TreeMap parameters = new TreeMap();
 
     Object target = null;
@@ -25,7 +19,7 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
 
     static List executeMethods = Arrays.asList(new String[] { "addBatch", "execute", "executeQuery", "executeUpdate" });
 
-    public PreparedStatementLoggingProxy(PreparedStatement ps, String sql) {
+    public PreparedStatementLoggingHandler(PreparedStatement ps, String sql) {
         target = ps;
         this.sql = sql;
     }
@@ -61,7 +55,7 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
                 }
             }
             if (r instanceof ResultSet)
-                r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet) r);
+                r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
         } catch (Throwable t) {
              LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(sql, parameters));
         }

@@ -6,16 +6,10 @@ import java.lang.reflect.Proxy;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class ResultSetLoggingProxy implements InvocationHandler {
-
-    static Logger logger = LoggerFactory.getLogger(ResultSetLoggingProxy.class);
-
+public class ResultSetLoggingHandler implements InvocationHandler {
     Object target = null;
 
-    public ResultSetLoggingProxy(ResultSet target) {
+    public ResultSetLoggingHandler(ResultSet target) {
         this.target = target;
     }
 
@@ -43,7 +37,7 @@ public class ResultSetLoggingProxy implements InvocationHandler {
     }
 
     static Object wrapByResultSetProxy(ResultSet r) {
-        return Proxy.newProxyInstance(r.getClass().getClassLoader(), new Class[] { ResultSet.class }, new ResultSetLoggingProxy(r));
+        return Proxy.newProxyInstance(r.getClass().getClassLoader(), new Class[] { ResultSet.class }, new ResultSetLoggingHandler(r));
     }
 
 }

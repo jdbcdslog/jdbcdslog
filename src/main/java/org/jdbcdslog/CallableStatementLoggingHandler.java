@@ -11,13 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings({"unchecked","rawtypes"})
-public class CallableStatementLoggingProxy extends PreparedStatementLoggingProxy implements InvocationHandler {
+public class CallableStatementLoggingHandler extends PreparedStatementLoggingHandler implements InvocationHandler {
 
-    static Logger logger = LoggerFactory.getLogger(CallableStatementLoggingProxy.class);
+    static Logger logger = LoggerFactory.getLogger(CallableStatementLoggingHandler.class);
 
     Map namedParameters = new TreeMap();
 
-    public CallableStatementLoggingProxy(CallableStatement ps, String sql) {
+    public CallableStatementLoggingHandler(CallableStatement ps, String sql) {
         super(ps, sql);
     }
 
@@ -59,7 +59,7 @@ public class CallableStatementLoggingProxy extends PreparedStatementLoggingProxy
                 }
             }
             if (r instanceof ResultSet)
-                r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet) r);
+                r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
         } catch (Throwable t) {
             LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, sql, parametersToString(), namedParameters.toString()));
         }
