@@ -4,18 +4,17 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
-import java.util.Map;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CallableStatementLoggingHandler extends PreparedStatementLoggingHandler implements InvocationHandler {
 
     static Logger logger = LoggerFactory.getLogger(CallableStatementLoggingHandler.class);
 
-    Map namedParameters = new TreeMap();
+    TreeMap namedParameters = new TreeMap();
 
     public CallableStatementLoggingHandler(CallableStatement ps, String sql) {
         super(ps, sql);
@@ -46,7 +45,7 @@ public class CallableStatementLoggingHandler extends PreparedStatementLoggingHan
                 long t2 = System.currentTimeMillis();
                 long time = t2 - t1;
 
-                StringBuffer s = LogUtils.createLogEntry(method, sql, parametersToString(), namedParameters.toString());
+                StringBuffer s = LogUtils.createLogEntry(method, sql, parameters, namedParameters);
 
                 if (ConfigurationParameters.showTime) {
                     s.append(" ").append(t2 - t1).append(" ms.");
@@ -61,7 +60,7 @@ public class CallableStatementLoggingHandler extends PreparedStatementLoggingHan
             if (r instanceof ResultSet)
                 r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
         } catch (Throwable t) {
-            LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, sql, parametersToString(), namedParameters.toString()));
+            LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, sql, parameters, namedParameters));
         }
         return r;
     }

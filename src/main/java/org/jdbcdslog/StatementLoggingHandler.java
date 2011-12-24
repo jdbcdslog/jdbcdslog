@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
+
 public class StatementLoggingHandler implements InvocationHandler {
     Object targetStatement = null;
 
@@ -28,7 +29,7 @@ public class StatementLoggingHandler implements InvocationHandler {
                 r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
             if (toLog) {
                 long t2 = System.currentTimeMillis();
-                StringBuffer sb = LogUtils.createLogEntry(method, args == null ? null : args[0], null, null);
+                StringBuffer sb = LogUtils.createLogEntry(method, args == null ? null : args[0].toString(), null, null);
                 long time = t2 - t1;
 
                 if (ConfigurationParameters.showTime) {
@@ -43,7 +44,7 @@ public class StatementLoggingHandler implements InvocationHandler {
 
             }
         } catch (Throwable t) {
-            LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, args[0], null, null));
+            LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, args[0].toString(), null, null));
         }
         return r;
     }

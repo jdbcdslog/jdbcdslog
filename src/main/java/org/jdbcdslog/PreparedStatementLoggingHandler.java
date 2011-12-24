@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
-@SuppressWarnings({"unchecked","rawtypes"})
+
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class PreparedStatementLoggingHandler implements InvocationHandler {
     TreeMap parameters = new TreeMap();
 
@@ -57,34 +58,8 @@ public class PreparedStatementLoggingHandler implements InvocationHandler {
             if (r instanceof ResultSet)
                 r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
         } catch (Throwable t) {
-             LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(sql, parameters));
+            LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(sql, parameters));
         }
         return r;
-    }
-
-    String parametersToString() {
-        StringBuffer sb2 = new StringBuffer();
-        sb2.setLength(0);
-        sb2.append("{");
-        int maxParamNumber = 0;
-        if (parameters.size() > 0)
-            maxParamNumber = ((Integer) parameters.lastKey()).intValue();
-        if (maxParamNumber > 0) {
-            Integer key = new Integer(1);
-            if (parameters.containsKey(key))
-                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameter(parameters.get(key)));
-            else
-                sb2.append("(null)");
-        }
-        for (int i = 2; i <= maxParamNumber; i++) {
-            Integer key = new Integer(i);
-            sb2.append(", ");
-            if (parameters.containsKey(key))
-                sb2.append(ConfigurationParameters.rdbmsSpecifics.formatParameter(parameters.get(key)));
-            else
-                sb2.append("(null)");
-        }
-        sb2.append("}");
-        return sb2.toString();
     }
 }

@@ -27,22 +27,16 @@ public class LogUtils {
         }
     }
 
-    public static StringBuffer createLogEntry(Method method, Object sql, String parameters, String namedParameters) {
-        String methodName = "createLogEntry() ";
-        if (logger.isDebugEnabled())
-            logger.debug(methodName);
+    public static StringBuffer createLogEntry(Method method, String sql, TreeMap parameters, TreeMap namedParameters) {
         StringBuffer s = new StringBuffer(method.getDeclaringClass().getName()).append(".").append(method.getName());
         s.append(" ");
-        if (sql != null)
-            s.append(sql);
-        if (parameters != null) {
-            s.append(" parameters: ");
-            s.append(parameters);
+
+        if (parameters != null && !parameters.isEmpty()) {
+            s.append(createLogEntry(sql, parameters));
+        } else {
+            s.append(createLogEntry(sql, namedParameters));
         }
-        if (namedParameters != null) {
-            s.append(" named parameters: ");
-            s.append(namedParameters);
-        }
+
         return s;
     }
 
@@ -93,9 +87,9 @@ public class LogUtils {
         // make sure lengths are ok, these need to be equal
         if (searchLength != replacementLength) {
             throw new IllegalArgumentException("Search and Replace array lengths don't match: "
-                + searchLength
-                + " vs "
-                + replacementLength);
+                    + searchLength
+                    + " vs "
+                    + replacementLength);
         }
 
         // keep track of which still have matches
