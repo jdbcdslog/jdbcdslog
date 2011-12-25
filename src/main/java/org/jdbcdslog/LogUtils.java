@@ -2,6 +2,7 @@ package org.jdbcdslog;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 public class LogUtils {
 
     static Logger logger = LoggerFactory.getLogger(LogUtils.class);
+
+    private final static String NAMED_PARAMETERS_PREFIX = ":";
 
     public static void handleException(Throwable e, Logger l, StringBuffer msg) throws Throwable {
         if (e instanceof InvocationTargetException) {
@@ -28,13 +31,15 @@ public class LogUtils {
     }
 
     public static StringBuffer createLogEntry(Method method, String sql, TreeMap parameters, TreeMap namedParameters) {
-        StringBuffer s = new StringBuffer(method.getDeclaringClass().getName()).append(".").append(method.getName());
-        s.append(" ");
+        StringBuffer s = new StringBuffer();
+        if (method != null) {
+            s.append(method.getDeclaringClass().getName()).append(".").append(method.getName()).append(": ");
+        }
 
         if (parameters != null && !parameters.isEmpty()) {
             s.append(createLogEntry(sql, parameters));
         } else {
-            s.append(createLogEntry(sql, namedParameters));
+            s.append(createLogEntryForNamedParameters(sql, namedParameters));
         }
 
         return s;
@@ -55,6 +60,21 @@ public class LogUtils {
             }
             sql = String.valueOf(m.appendTail(stringBuffer));
 
+            s.append(sql).append(";");
+        }
+
+        return s;
+    }
+
+    public static StringBuffer createLogEntryForNamedParameters(String sql, TreeMap namedParameters) {
+        StringBuffer s = new StringBuffer();
+
+        if (sql != null) {
+            if (namedParameters != null && !namedParameters.isEmpty()) {
+                for (String key : (Set<String>) namedParameters.keySet()) {
+                    sql = sql.replaceAll(NAMED_PARAMETERS_PREFIX + key, ConfigurationParameters.rdbmsSpecifics.formatParameter(namedParameters.get(key)));
+                }
+            }
             s.append(sql).append(";");
         }
 
@@ -188,5 +208,4 @@ public class LogUtils {
 
         return result;
     }
-
 }
