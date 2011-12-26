@@ -66,6 +66,7 @@ public class LogUtils {
         return s;
     }
 
+    @SuppressWarnings("unchecked")
     public static StringBuffer createLogEntryForNamedParameters(String sql, TreeMap namedParameters) {
         StringBuffer s = new StringBuffer();
 
