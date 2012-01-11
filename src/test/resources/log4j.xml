@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration debug="true">
+	<appender name="fileout" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="jdbcdslog.log"/>
+    	<param name="MaxFileSize" value="100MB"/>
+    	<param name="MaxBackupIndex" value="1"/>
+    	<layout class="org.apache.log4j.PatternLayout">
+      		<param name="ConversionPattern" value="%5p (%d{DATE}) [%t] (%F:%L) - %m%n"/>
+    	</layout>
+  	</appender>
+	<appender name="out" class="org.apache.log4j.AsyncAppender">
+    	<appender-ref ref="fileout"/>
+    	<param name="blocking" value="false"/>
+    	<param name="bufferSize" value="100000"/>
+  	</appender>
+  	<logger name = "org.jdbcdslog">
+  		<level value = "all"/>
+  	</logger>
+    <root>
+		<priority value = "off"/>
+      	<appender-ref ref="out"/>
+  </root>
+</log4j:configuration>
