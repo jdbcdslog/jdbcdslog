@@ -19,17 +19,20 @@
 
     <dependencies>
         <dependency>
-            <groupId>slf4j</groupId>
+            <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.5.10</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- test scope -->
         <dependency>
-            <groupId>slf4j</groupId>
+            <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.10</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -54,12 +57,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.9</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
@@ -67,15 +72,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <layout>default</layout>
-            <id>projectlibs</id>
-            <name>projectlibs</name>
-            <url>file:///${basedir}/lib</url>
-        </repository>
-    </repositories>
 
     <build>
         <plugins>

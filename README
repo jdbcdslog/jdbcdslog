@@ -1,0 +1,11 @@
+jdbcdslog: Easy to Use Logging Tool for JDBC.
+
+If you are talking to DB using JDBC and want to trace your queries and even results of the queries -- check out jdbcdslog. 
+It's easy to use and the same time full-featered tool for JDBC calls tracing. 
+
+Features include:
+- can be attached on Connection, Driver or DataSource(XA,Pooling) levels
+- can log bind parameters for PreparedStatement and CallableStatement calls
+- can log result of queries from ResultSet objects
+- can log queries execution time
+- logging engine agnostic (thanks to SLF4J, you can use most of popular logging libraries like log4j, apache common logging, java logging or simple printing to System.out)
