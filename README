@@ -20,4 +20,10 @@ Features include:
 - logging engine agnostic (thanks to SLF4J, you can use most of popular logging libraries like log4j, apache common logging, java logging or simple printing to System.out)
 - can log calling method stack trace.
 
+<<<<<<< HEAD
 if you want get more infos please see the original version of jdbcdslog at http://code.google.com/p/jdbcdslog/
+=======
+if you want get more infos please see the original version of jdbcdslog at http://code.google.com/p/jdbcdslog/
+
+# Commit by Git
+>>>>>>> de2be68227e6a8bdd30f6a20b006b4c755a3164f
