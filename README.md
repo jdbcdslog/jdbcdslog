@@ -23,7 +23,8 @@ if you like the __native version__ ([jdbcdslog](http://code.google.com/p/jdbcdsl
 
 ### Git Link
 if you love git please clone or fork it.(<https://github.com/jdbcdslog/jdbcdslog>).
-> git://github.com/jdbcdslog/jdbcdslog.git 
+
+	git://github.com/jdbcdslog/jdbcdslog.git 
 
 ### How To Use
 please see user guide: [Origin UserGuide](http://code.google.com/p/jdbcdslog/wiki/UserGuide ) and [UserGuide](http://code.google.com/p/jdbcdslog-exp/wiki/UserGuide)
@@ -32,4 +33,6 @@ please see user guide: [Origin UserGuide](http://code.google.com/p/jdbcdslog/wik
 if you have any questions,welcome to contact me via Email(lishunli.me@gmail.com) or create issues with <http://code.google.com/p/jdbcdslog-exp/issues/list> ,i will reply you as soon as possible.
 
 ### Donate
-![https://me.alipay.com/lishunli](http://usc.googlecode.com/files/2ec58971.png)
+[![Donate](http://usc.googlecode.com/files/2ec58971.png)](https://me.alipay.com/lishunli)
+
+
