@@ -33,7 +33,4 @@ please see user guide: [Origin UserGuide](http://code.google.com/p/jdbcdslog/wik
 if you have any questions,welcome to contact me via Email(lishunli.me@gmail.com) or create issues with <http://code.google.com/p/jdbcdslog-exp/issues/list> ,i will reply you as soon as possible.
 
 ### Donate
-[![Donate](http://usc.googlecode.com/files/2ec58971.png)](https://me.alipay.com/lishunli){:target="_blank"}
-
-
-<a href="https://me.alipay.com/lishunli" target="_blank">![Donate](http://usc.googlecode.com/files/2ec58971.png)</a
+<a href="https://me.alipay.com/lishunli" target="_blank">![Donate](http://usc.googlecode.com/files/2ec58971.png)</a>
