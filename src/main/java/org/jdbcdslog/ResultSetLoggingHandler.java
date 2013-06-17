@@ -17,13 +17,13 @@ public class ResultSetLoggingHandler implements InvocationHandler {
         Object r = null;
         long t1 = 0;
         try {
-            t1 = System.currentTimeMillis();
+            t1 = System.nanoTime();
             r = method.invoke(target, args);
         } catch (Throwable e) {
             LogUtils.handleException(e, ResultSetLogger.getLogger(), LogUtils.createLogEntry(method, null, null, null));
         }
         if (ResultSetLogger.isInfoEnabled() && method.getName().equals("next") && ((Boolean) r).booleanValue()) {
-            long t2 = System.currentTimeMillis();
+            long t2 = System.nanoTime();
             String fullMethodName = method.getDeclaringClass().getName() + "." + method.getName();
             ResultSet rs = (ResultSet) target;
             ResultSetMetaData md = rs.getMetaData();
@@ -34,7 +34,7 @@ public class ResultSetLoggingHandler implements InvocationHandler {
                 s.append(", ").append(ConfigurationParameters.rdbmsSpecifics.formatParameter(rs.getObject(i)));
             s.append("}");
             if (ConfigurationParameters.showTime) {
-                s.append(" ").append(t2 - t1).append(" ms.");
+                s.append(" ").append(t2 - t1).append(" ns.");
             }
 
             ResultSetLogger.info(s.toString());

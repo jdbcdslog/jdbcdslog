@@ -31,7 +31,7 @@ public class PreparedStatementLoggingHandler implements InvocationHandler {
             long t1 = 0;
             boolean toLog = (StatementLogger.isInfoEnabled() || SlowQueryLogger.isInfoEnabled()) && executeMethods.contains(method.getName());
             if (toLog)
-                t1 = System.currentTimeMillis();
+                t1 = System.nanoTime();
             r = method.invoke(target, args);
             if (setMethods.contains(method.getName()) && args[0] instanceof Integer)
                 parameters.put(args[0], args[1]);
@@ -43,10 +43,10 @@ public class PreparedStatementLoggingHandler implements InvocationHandler {
                 // StringBuffer sb = LogUtils.createLogEntry(method, sql, parametersToString(), null);
                 StringBuffer sb = LogUtils.createLogEntry(sql, parameters);
 
-                long t2 = System.currentTimeMillis();
+                long t2 = System.nanoTime();
                 long time = t2 - t1;
                 if (ConfigurationParameters.showTime) {
-                    sb.append(" ").append(t2 - t1).append(" ms.");
+                    sb.append(" ").append(t2 - t1).append(" ns.");
                 }
 
                 StatementLogger.info(sb.toString());
