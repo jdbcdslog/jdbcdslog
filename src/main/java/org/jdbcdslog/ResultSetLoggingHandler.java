@@ -15,12 +15,15 @@ public class ResultSetLoggingHandler implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object r = null;
+        long t1 = 0;
         try {
+            t1 = System.currentTimeMillis();
             r = method.invoke(target, args);
         } catch (Throwable e) {
             LogUtils.handleException(e, ResultSetLogger.getLogger(), LogUtils.createLogEntry(method, null, null, null));
         }
         if (ResultSetLogger.isInfoEnabled() && method.getName().equals("next") && ((Boolean) r).booleanValue()) {
+            long t2 = System.currentTimeMillis();
             String fullMethodName = method.getDeclaringClass().getName() + "." + method.getName();
             ResultSet rs = (ResultSet) target;
             ResultSetMetaData md = rs.getMetaData();
@@ -30,6 +33,9 @@ public class ResultSetLoggingHandler implements InvocationHandler {
             for (int i = 2; i <= md.getColumnCount(); i++)
                 s.append(", ").append(ConfigurationParameters.rdbmsSpecifics.formatParameter(rs.getObject(i)));
             s.append("}");
+            if (ConfigurationParameters.showTime) {
+                s.append(" ").append(t2 - t1).append(" ms.");
+            }
 
             ResultSetLogger.info(s.toString());
         }
