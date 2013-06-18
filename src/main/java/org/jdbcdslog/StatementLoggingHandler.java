@@ -2,6 +2,7 @@ package org.jdbcdslog;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Arrays;
@@ -23,17 +24,18 @@ public class StatementLoggingHandler implements InvocationHandler {
             boolean toLog = (StatementLogger.isInfoEnabled() || SlowQueryLogger.isInfoEnabled()) && executeMethods.contains(method.getName());
             long t1 = 0;
             if (toLog)
-                t1 = System.currentTimeMillis();
+                t1 = System.nanoTime();
             r = method.invoke(targetStatement, args);
             if (r instanceof ResultSet)
                 r = ResultSetLoggingHandler.wrapByResultSetProxy((ResultSet) r);
             if (toLog) {
-                long t2 = System.currentTimeMillis();
+                long t2 = System.nanoTime();
                 StringBuffer sb = LogUtils.createLogEntry(method, args == null ? null : args[0].toString(), null, null);
                 long time = t2 - t1;
 
                 if (ConfigurationParameters.showTime) {
-                    sb.append(" ").append(t2 - t1).append(" ms.");
+                    BigDecimal t = (new BigDecimal(t2)).subtract(new BigDecimal(t1)).divide(new BigDecimal(1000000000));
+                    sb.append(" ").append(t).append(" s.");
                 }
 
                 StatementLogger.info(sb.toString());
