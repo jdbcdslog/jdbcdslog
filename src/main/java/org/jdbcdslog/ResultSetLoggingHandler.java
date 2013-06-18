@@ -3,6 +3,7 @@ package org.jdbcdslog;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
@@ -34,7 +35,8 @@ public class ResultSetLoggingHandler implements InvocationHandler {
                 s.append(", ").append(ConfigurationParameters.rdbmsSpecifics.formatParameter(rs.getObject(i)));
             s.append("}");
             if (ConfigurationParameters.showTime) {
-                s.append(" ").append(t2 - t1).append(" ns.");
+                BigDecimal t = (new BigDecimal(t2)).subtract(new BigDecimal(t1)).divide(new BigDecimal(1000000000));
+                s.append(" ").append(t).append(" s.");
             }
 
             ResultSetLogger.info(s.toString());
