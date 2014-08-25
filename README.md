@@ -31,6 +31,3 @@ please see user guide: [Origin UserGuide](http://code.google.com/p/jdbcdslog/wik
 
 ### Support
 if you have any questions,welcome to contact me via Email(lishunli.me@gmail.com) or create issues with <https://github.com/jdbcdslog/jdbcdslog/issues> ,i will reply you as soon as possible.
-
-### Donate
-<a href="https://me.alipay.com/lishunli" target="_blank">![Donate](http://usc.googlecode.com/files/2ec58971.png)</a>
