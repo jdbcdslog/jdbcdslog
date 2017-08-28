@@ -1,3 +1,6 @@
+# Recommend
+please see <https://github.com/adrianshum/jdbcdslog>, that has more interesting new features.
+
 # What is jdbcdslog-exp
 jdbcdslog-exp is an experimental fork of jdbcdslog that:
 
